@@ -71,14 +71,6 @@
 					{/if}
 				}
 
-				.section-features {
-					{if $core.config.bg_features_use_color}
-						background: {$core.config.bg_features_color};
-					{elseif $core.config.bg_features}
-						background-image: url('{$core.page.nonProtocolUrl}uploads/{$core.config.bg_features}');
-					{/if}
-				}
-
 				.footer-blocks { background: {$core.config.footer_blocks_bg}; }
 				.footer { background: {$core.config.footer_bg}; }
 				.nav-footer > li > a,
@@ -94,15 +86,18 @@
 	<body class="page-{$core.page.name}">
 		<div class="inventory">
 			<div class="container">
-				{if $core.config.website_social}
-					<ul class="nav-inventory nav-inventory-social pull-left hidden-xs">
-						{if $core.config.website_social_t}<li><a href="{$core.config.website_social_t}" class="twitter"><span class="fa fa-twitter"></span></a></li>{/if}
-						{if $core.config.website_social_f}<li><a href="{$core.config.website_social_f}" class="facebook"><span class="fa fa-facebook"></span></a></li>{/if}
-						{if $core.config.website_social_g}<li><a href="{$core.config.website_social_g}" class="google-plus"><span class="fa fa-google-plus"></span></a></li>{/if}
-						{if $core.config.website_social_i}<li><a href="{$core.config.website_social_i}" class="linkedin"><span class="fa fa-linkedin"></span></a></li>{/if}
-					</ul>
-				{/if}
+				{ia_blocks block='account'}
 				{include 'language-selector.tpl'}
+				{if $core.config.search_inventory}
+					<form method="get" action="{$smarty.const.IA_URL}search/" class="search-inventory pull-left">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<button class="btn" type="submit"><span class="fa fa-search"></span></span></button>
+							</div>
+							<input type="text" name="q" class="form-control" placeholder="{lang key='search'}">
+						</div>
+					</form>
+				{/if}
 				{ia_blocks block='inventory'}
 			</div>
 		</div>
@@ -130,7 +125,6 @@
 				</div>
 
 				<div class="collapse navbar-collapse" id="navbar-collapse">
-					{ia_blocks block='account'}
 					{ia_blocks block='mainmenu'}
 				</div>
 			</div>

@@ -1,28 +1,69 @@
 {if 'mainmenu' == $position}
-	{ia_menu menus=$menu.contents class="nav navbar-nav navbar-right nav-main {$menu.classname}"}
+	{ia_menu menus=$menu.contents class="nav navbar-nav navbar-left nav-main {$menu.classname}"}
 {elseif 'inventory' == $position}
 	{ia_menu menus=$menu.contents class="nav-inventory hidden-sm hidden-xs pull-right {$menu.classname}"}
 {elseif 'account' == $position}
 	{if 'account' == $menu.name && $member && $core.config.members_enabled}
-		<ul class="nav navbar-nav navbar-right nav-account">
+		<ul class="nav-inventory nav-account pull-left">
+			{access object='admin_access'}
+				<li><a rel="nofollow" href="{$smarty.const.IA_ADMIN_URL}" target="_blank" title="{lang key='admin_dashboard'}"><span class="fa fa-cog"></span><span class="hidden-lg"> {lang key='admin_dashboard'}</span></a></li>
+			{/access}
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					{*printImage imgfile=$member.avatar title=$member.fullname|default:$member.username class='img-circle' gravatar=true email=$member.email*}
 					{$member.fullname|default:$member.username}
 					<span class="caret"></span>
 				</a>
 				{ia_hooker name='smartyFrontInsideAccountBox'}
 				{ia_menu menus=$menu.contents class='dropdown-menu' loginout=true}
 			</li>
-			{access object='admin_access'}
-				<li><a rel="nofollow" href="{$smarty.const.IA_ADMIN_URL}" target="_blank" title="{lang key='admin_dashboard'}"><span class="fa fa-cog"></span><span class="hidden-lg"> {lang key='admin_dashboard'}</span></a></li>
-			{/access}
 		</ul>
 	{else}
-		<ul class="nav navbar-nav navbar-right">
-			<li{if 'login' == $core.page.name} class="active"{/if}><a href="{$smarty.const.IA_URL}login/">{lang key='login'}</a></li>
-			<li{if 'registration' == $core.page.name} class="active"{/if}><a href="{$smarty.const.IA_URL}registration/">{lang key='register'}</a></li>
+		<ul class="nav-inventory pull-left">
+			<li><a data-toggle="modal" data-target="#loginModal" href="#"><span class="fa fa-user"></span> <span class="-guest">{lang key='login_sign_up'}</span></a></li>
 		</ul>
+		<div class="modal fade" id="loginModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">{lang key='login_sign_up'}</h4>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-6">
+									<h4>{lang key='login'}</h4>
+
+									<form action="{$smarty.const.IA_URL}login/" method="post">
+										{preventCsrf}
+
+										<div class="form-group">
+											<label for="field_login">{lang key='username_or_email'}:</label>
+											<input class="form-control" type="text" tabindex="4" name="username" value="{if isset($smarty.post.username)}{$smarty.post.username|escape:'html'}{/if}">
+										</div>
+
+										<div class="form-group">
+											<label for="field_password">{lang key='password'}:</label>
+											<input class="form-control" type="password" tabindex="5" name="password">
+										</div>
+
+										<div class="form-group form-actions">
+											<button class="btn btn-primary" type="submit" tabindex="6" name="login">{lang key='login'}</button>
+											<a class="btn btn-link" href="{$smarty.const.IA_URL}forgot/">{lang key='forgot'}</a>
+										</div>
+									</form>
+								</div>
+								<div class="col-md-6">
+									<h4>{lang key='register'}</h4>
+									<p>{lang key='register_tag'}</p>
+									<p><a class="btn btn-success" href="{$smarty.const.IA_URL}registration/" rel="nofollow">{lang key='registration'}</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	{/if}
 {elseif in_array($position, array('left', 'right', 'user1', 'user2', 'top'))}
 	{if !empty($menu.contents[0]) && 'account' != $menu.name}

@@ -1,5 +1,10 @@
 .inventory {
+  font-size: @inventory-font-size;
   background: @inventory-bg;
+
+  @media (max-width: @grid-float-breakpoint) {
+    padding: 5px 0;
+  }
 }
 
 
@@ -9,48 +14,37 @@
 // --------------------------------------------------
 
 .search-inventory {
-  margin: 0 20px 0 0;
-  position: relative;
-  padding: 0 0 0 15px;
-  background: fade(#fff, 3%);
+  max-width: 280px;
+  margin: @inventory-search-height / 2 0;
 
-  &.pull-right {
-    margin: 0 0 0 20px;
+  input,
+  button {
+    height: @inventory-search-height;
+    line-height: @inventory-search-height;
+    font-size: @inventory-font-size;
+    border: none;
+    background-color: transparent;
+
+    &,
+    &:hover,
+    &:focus {
+      color: @inventory-link-color;
+      outline: none !important;
+    }
   }
 
   input {
-    background: none;
-    border: 0 none;
-    line-height: @inventory-height;
-    width: 100px;
-    padding: 0;
-    color: @inventory-text-color;
-
-    .placeholder(fade(@inventory-text-color, 20%));
-
-    &:focus {
-      outline: 0 none;
-    }
+    padding-left: 4px;
   }
 
   button {
-    border: 0;
-    background: none;
-    color: @inventory-link-color;
-    line-height: @inventory-height;
-    padding: 0 15px 0 15px;
-
-    &:focus {
-      outline: 0 none;
-    }
-
-    &:hover {
-      background: fade(#fff, 3%);
-    }
+    width: @inventory-search-height;
+    padding: 0;
+    text-align: center;
   }
 
   @media (max-width: @grid-float-breakpoint) {
-    
+
     &.pull-right {
       margin: 0 20px 0 0;
       float: left !important;
@@ -65,27 +59,35 @@
 // --------------------------------------------------
 
 .nav-inventory {
-  margin: 0 20px 0 0;
+  .clearfix();
+  margin: 0;
   padding: 0;
   list-style-type: none;
 
+  @media (max-width: @grid-float-breakpoint) {
+    float: none !important;
+  }
+
   > li {
     float: left;
-    margin: 0 10px 0 0;
 
     > a {
+      display: block;
+      line-height: @inventory-height;
+      text-decoration: none;
+      outline: none !important;
+
       &,
       &:focus {
-        display: block;
-        line-height: @inventory-height;
         color: @inventory-link-color;
-        font-size: 12px;
-        text-decoration: none;
       }
 
       &:hover {
         color: @inventory-link-hover-color;
-        text-decoration: underline;
+      }
+
+      .fa {
+        margin-right: 2px;
       }
     }
 
@@ -94,56 +96,29 @@
     &.active > a:hover {
       color: @inventory-link-active-color;
     }
+
+    .dropdown-menu {
+
+      > li {
+
+        > a {
+          font-size: 12px;
+        }
+      }
+    }
   }
 
-  &.pull-right {
-    margin: 0 0 0 20px;
+  &.pull-left {
 
     > li {
-      margin: 0 0 0 10px;
-    }
-  }
-}
-
-
-
-//
-// Social nav
-// --------------------------------------------------
-
-.nav-inventory-social {
-
-  > li {
-    margin: 0;
-
-    > a {
-      padding: 0 15px;
-      border-left: 1px solid fade(#fff, 5%);
-      color: @inventory-social-link-color;
-    }
-
-    &:last-child > a {
-      border-right: 1px solid fade(#fff, 5%);
+      margin-right: 15px;
     }
   }
 
   &.pull-right {
-    margin: 0 0 0 20px;
 
     > li {
-      margin: 0;
+      margin-left: 15px;
     }
   }
-}
-
-
-
-//
-// Inventory text
-// --------------------------------------------------
-
-.text-inventory {
-  margin: 0;
-  line-height: @inventory-height;
-  color: @inventory-text-color;
 }

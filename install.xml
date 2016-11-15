@@ -80,11 +80,17 @@
 	<config group="template_automotive" 
 			type="divider"
 			order="3100">Inventory bar</config>
+	<config group="template_kickstart"
+			name="search_inventory"
+			type="radio"
+			order="3101"
+			values="1,0"
+			description="Show search in inventory">1</config>
 	<config group="template_automotive"
 			name="custom_color_inventory_bg"
 			type="colorpicker"
 			order="3102"
-			description="Background">#323232</config>
+			description="Background">#0f2d27</config>
 	<config group="template_automotive"
 			name="custom_color_inventory_link"
 			type="colorpicker"
@@ -94,12 +100,12 @@
 			name="custom_color_inventory_link_hover"
 			type="colorpicker"
 			order="3104"
-			description="Link hover color">rgba(255,255,255,0.5)</config>
+			description="Link hover color">rgba(255,255,255)</config>
 	<config group="template_automotive"
 			name="custom_color_inventory_link_active"
 			type="colorpicker"
 			order="3105"
-			description="Link active color">rgba(255,255,255,0.7)</config>
+			description="Link active color">rgba(255,255,255)</config>
 
 	<config group="template_automotive" 
 			type="divider"
@@ -352,6 +358,8 @@ that allows you to build websites for any purpose. Yes, from blog to corporate m
 	<phrases>
 		<phrase category="frontend" key="login">Log in</phrase>
 		<phrase category="frontend" key="register">Sign up</phrase>
+		<phrase category="frontend" key="register_tag">Register on our website and sell your car. Many features included in your private area.</phrase>
+		<phrase category="frontend" key="login_sign_up">Login / Sign up</phrase>
 		<phrase category="frontend" key="back_to_top">Back to top</phrase>
 		<phrase category="frontend" key="admin_dashboard">Admin Dashboard</phrase>
 	</phrases>
