@@ -10,7 +10,7 @@ Default template for Subrion CMS 4.x
 Or you can
 ```
 cd [root]/templates # where root is the location of subrion core
-git clone https://github.com/intelliants/subrion-template-automotive.git ./kickstart
+git clone https://github.com/intelliants/subrion-template-automotive.git ./automotive
 ```
 Voila! Just activate it in your Dashboard / Extensions / Templates
 
